@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body>
+  <div class="page">
+    <header class="header">
+      <img src="./images/header__logo.svg" alt="Место" class="header__logo">
+    </header>
+    <main class="content">
+      <section class="profile">
+        <div class="profile__info">
+          <img src="./images/profile__avatar.jpg" alt="Фото" class="profile__avatar">
+          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <button class="profile__edit-button">
+            <img src="./images/profile__edit.svg" alt="Редактировать" class="profile__edit">
+          </button>
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+        <button class="profile__add-button">
+          <img src="./images/profile__add.svg" alt="Добавить" class="profile__add">
+        </button>
+      </section>
+      <section class="photo-grid">
+        <div class="cards">
+          <div class="card">
+            <img src="./images/card__photo_1.jpg" alt="горы" class="card__photo">
+            <div class="card__flex-block">
+              <h2 class="card__title">Карачаевск</h2>
+              <img src="./images/card__like.png" alt="Нравится" class="card__like">
+            </div>
+          </div>
+          <div class="card">
+            <img src="./images/card__photo_2.jpg" alt="Склон" class="card__photo">
+            <div class="card__flex-block">
+              <h2 class="card__title">Гора Эльбрус</h2>
+              <img src="./images/card__like.png" alt="Нравится" class="card__like">
+            </div>
+          </div>
+          <div class="card">
+            <img src="./images/card__photo_3.jpg" alt="Долина" class="card__photo">
+            <div class="card__flex-block">
+              <h2 class="card__title">Домбай</h2>
+              <img src="./images/card__like.png" alt="Нравится" class="card__like">
+            </div>
+          </div>
+          <div class="card">
+            <img src="./images/card__photo_4.jpg" alt="Гора" class="card__photo">
+            <div class="card__flex-block">
+              <h2 class="card__title">Гора Эльбрус</h2>
+              <img src="./images/card__like.png" alt="Нравится" class="card__like">
+            </div>
+          </div>
+          <div class="card">
+            <img src="./images/card__photo_5.jpg" alt="Долина" class="card__photo">
+            <div class="card__flex-block">
+              <h2 class="card__title">Домбай</h2>
+              <img src="./images/card__like.png" alt="Нравится" class="card__like">
+            </div>
+          </div>
+          <div class="card">
+            <img src="./images/card__photo_6.jpg" alt="Горы" class="card__photo">
+            <div class="card__flex-block">
+              <h2 class="card__title">Карачаево-Черкессия</h2>
+              <img src="./images/card__like.png" alt="Нравится" class="card__like">
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="popup">
+        <form class="popup__container">
+          <div class="popup__container-wrapper">
+            <button class="popup__close"></button>
+            <div class="popup__content">
+              <h2 class="popup__title">Редактировать профиль</h2>
+              <fieldset class="popup__input-form">
+                <input type="text" class="popup__input-name" placeholder="Имя">
+                <input type="text" class="popup__input-description" placeholder="Род занятий">
+              </fieldset>
+            </div>
+            <button type="submit" class="popup__save">Сохранить</button>
+          </div>
+        </form>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__author">&#169; 2021. Mesto Russia</p>
+    </footer>
+  </div>
+  <script src="./scripts/script.js"></script>
+</body>
+
+</html>
