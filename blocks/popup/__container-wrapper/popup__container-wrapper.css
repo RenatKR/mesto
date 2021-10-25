@@ -1,9 +1,0 @@
-.popup__container-wrapper {
-  width: calc(100% - 72px);
-}
-
-@media (max-width: 525px) {
-  .popup__container-wrapper {
-    width: calc(100% - 44px);
-  }
-}
