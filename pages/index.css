@@ -35,6 +35,10 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__author/footer__author.css);
 
+/*popup-add*/
+
+@import url(../blocks/popup-add/popup-add.css);
+
 /*popup*/
 
 @import url(../blocks/popup/popup.css);
@@ -47,3 +51,5 @@
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/_is-opened/popup_is-opened.css);
+
+

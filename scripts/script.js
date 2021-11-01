@@ -8,7 +8,7 @@ let profileElement = document.querySelector('.profile');
 let profileTitle = profileElement.querySelector('.profile__title');
 let profileSubtitle = profileElement.querySelector('.profile__subtitle');
 let profileEditButton = profileElement.querySelector('.profile__edit-button');
-let profileAddButton = profileElement.querySelector('.profile__add-button');
+
 
 const popupOpen = function() {
   popupElement.classList.add('popup_is-opened');
@@ -78,6 +78,50 @@ cardsElement.querySelector('.card__title').textContent = el.name;
 
 cards.appendChild(cardsElement);
 })
+
+//добавление и удаление popupAdd
+
+let profileAddButton = profileElement.querySelector('.profile__add-button');
+let popupAddElement = document.querySelector('.popup-add');
+let formAddElement = popupAddElement.querySelector('.popup__submit-form')
+let placeInput = popupAddElement.querySelector('.popup__input_type_place');
+let srcInput = popupAddElement.querySelector('.popup__input_type_src');
+let profileCloseAddButton = popupAddElement.querySelector('.popup__close');
+
+const popupAddOpen = function() {
+  popupAddElement.classList.add('popup_is-opened');
+}
+
+profileAddButton.addEventListener('click', popupAddOpen);
+
+const popupAddClose = function() {
+  popupAddElement.classList.remove('popup_is-opened');
+} 
+
+profileCloseAddButton.addEventListener('click', popupAddClose);
+
+//добавление карточек
+
+let formAddSubmitHandler = function(evt) {
+evt.preventDefault();
+const cardAddElement = cardsTemplate.querySelector('.card').cloneNode(true);
+cardAddElement.querySelector('.card__photo').src = srcInput.value;
+cardAddElement.querySelector('.card__title').textContent = placeInput.value;
+cards.prepend(cardAddElement);
+popupAddClose();
+}
+
+formAddElement.addEventListener('submit', formAddSubmitHandler);
+
+//лайк карточки
+
+
+
+
+
+
+
+
 
 
 
