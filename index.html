@@ -27,9 +27,10 @@
           <img src="./images/profile__add.svg" alt="Добавить" class="profile__add">
         </button>
       </section>
+
       <section class="photo-grid">
         <div class="cards">
-          <div class="card">
+          <!--<div class="card">
             <img src="./images/card__photo_1.jpg" alt="горы" class="card__photo">
             <div class="card__flex-block">
               <h2 class="card__title">Карачаевск</h2>
@@ -82,7 +83,7 @@
                 <img src="./images/card__like.png" alt="Нравится">
               </button>
             </div>
-          </div>
+          </div> -->
         </div>
       </section>
       <section class="popup">
@@ -98,14 +99,32 @@
               <button type="submit" class="popup__save">Сохранить</button>
             </form>
           </div>
-        </div>
+        </div> 
       </section>
     </main>
     <footer class="footer">
       <p class="footer__author">&#169; 2021. Mesto Russia</p>
     </footer>
   </div>
+  
+  <template id="card">
+    
+      <div class="card">
+        <img src="" alt="горы" class="card__photo">
+        <div class="card__flex-block">
+          <h2 class="card__title"></h2>
+          <button type="button" class="card__like">
+            <img src="./images/card__like.png" alt="Нравится">
+          </button>
+        </div>
+      </div>
+    
+    </template>
+
   <script src="./scripts/script.js"></script>
 </body>
 
 </html>
+
+
+
