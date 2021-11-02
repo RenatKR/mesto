@@ -29,6 +29,7 @@
 @import url(../blocks/card/__flex-block/card__flex-block.css);
 @import url(../blocks/card/__title/card__title.css);
 @import url(../blocks/card/__like/card__like.css);
+@import url(../blocks/card/__trash/card__trash.css);
 
 /*footer*/
 

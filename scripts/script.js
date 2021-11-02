@@ -115,22 +115,23 @@ formAddElement.addEventListener('submit', formAddSubmitHandler);
 
 //лайк карточки
 
+//const likeButton = document.querySelectorAll('.card__like');
 
+//console.log(likeButton);
+//const likeImg = document.querySelectorAll('.card__like-img');
+//console.log(likeImg.src);
 
+//const AddLike = function () {
+ // LikeImg.src = 
+//} 
 
+// удаление карточки
 
+let delButton = document.querySelectorAll('.card__trash');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+delButton.forEach (function(el) {
+  const closestCard = el.parentElement;
+  el.addEventListener('click', function () {
+    closestCard.remove();
+  })
+});
