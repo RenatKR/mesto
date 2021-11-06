@@ -70,21 +70,15 @@ const cards = document.querySelector('.cards');
 initialCards.forEach(el => {
 
   const cardsElement = cardsTemplate.querySelector('.card').cloneNode(true);
-
   cardsElement.querySelector('.card__photo').src = el.link;
-
   cardsElement.querySelector('.card__title').textContent = el.name;
-
   cardsElement.querySelector('.card__like').addEventListener('click', function(evt) { evt.target.classList.toggle('card__like_active') });
-
   cardsElement.querySelector('.card__trash').addEventListener('click', function(evt) { evt.target.parentElement.remove(); })
-
   cardsElement.querySelector('.card__photo').addEventListener('click', function() {
     popupImg.classList.add('popup_is-opened');
     popupImgImg.src = el.link;
     popupImgTitle.textContent = el.name;
   })
-
   cards.appendChild(cardsElement);
 })
 
@@ -134,9 +128,7 @@ let popupImg = document.querySelector('.popup-image')
 let cardTitle = document.querySelector('.card__title')
 let popupImgImg = popupImg.querySelector('.popup-image__img');
 let popupImgTitle = popupImg.querySelector('.popup-image__title');
-
 let popupImgButtonClose = popupImg.querySelector('.popup-image__close');
-
 popupImgButtonClose.addEventListener('click', function() {
   popupImg.classList.remove('popup_is-opened');
 });
