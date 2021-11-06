@@ -37,10 +37,6 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__author/footer__author.css);
 
-/*popup-add*/
-
-@import url(../blocks/popup-add/popup-add.css);
-
 /*popup*/
 
 @import url(../blocks/popup/popup.css);
