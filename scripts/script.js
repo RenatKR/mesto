@@ -62,32 +62,37 @@ const popupImgButtonClose = popupImg.querySelector('.popup-image__close');
 
 // Шесть карточек «из коробки»
 
-function createCard(el) {
-
+function createCard(name, link, alt) {
   const cardsElement = cardsTemplate.querySelector('.card').cloneNode(true);
-
-  cardsElement.querySelector('.card__photo').src = el.link;
-  cardsElement.querySelector('.card__photo').alt = el.alt;
-  cardsElement.querySelector('.card__title').textContent = el.name;
-
-  cardsElement.querySelector('.card__like').addEventListener('click', function(evt) { evt.target.classList.toggle('card__like_active') });
-  cardsElement.querySelector('.card__trash').addEventListener('click', function(evt) { evt.target.parentElement.remove(); })
-  cardsElement.querySelector('.card__photo').addEventListener('click', function() {
-    popupImg.classList.add('popup_is-opened');
-    popupImgImg.src = el.link;
-    popupImgImg.alt = el.alt;
-    popupImgTitle.textContent = el.name;
+  cardsElement.querySelector('.card__title').textContent = name;
+  cardsElement.querySelector('.card__photo').src = link;
+  cardsElement.querySelector('.card__photo').alt = alt;
+  cardsElement.querySelector('.card__like').addEventListener('click', likeOption);
+  cardsElement.querySelector('.card__trash').addEventListener('click', removeOption);
+  cardsElement.querySelector('.card__photo').addEventListener('click', function(evt) {
+    openPopup(popupImg);
+    popupImgImg.src = evt.target.src;
+    popupImgImg.alt = alt;
+    popupImgTitle.textContent = name;
   })
-
   return cardsElement;
 }
 
-function addCard(el) {
-  cards.appendChild(createCard(el));
+function likeOption(evt) {
+  evt.target.classList.toggle('card__like_active');
+}
+
+function removeOption(evt) {
+  evt.target.parentElement.remove();
+}
+
+function addCardEnd(el) {
+  cards.appendChild(el);
 }
 
 initialCards.forEach(el => {
-  addCard(el);
+  const card = createCard(el.name, el.link, el.alt);
+  addCardEnd(card);
 })
 
 //add-close popup
@@ -116,14 +121,14 @@ profileEditButton.addEventListener('click', profilePopupOpen);
 
 profilePopupCloseButton.addEventListener('click', profilePopupClose);
 
-const formSubmitHandler = function(evt) {
+const submitProfileForm = function(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = jobInput.value;
   closePopup(profilePopup);
 }
 
-profilePopupForm.addEventListener('submit', formSubmitHandler);
+profilePopupForm.addEventListener('submit', submitProfileForm);
 
 // popupAddCard
 
@@ -139,30 +144,28 @@ cardAddButton.addEventListener('click', cardAddPopupOpen);
 
 cardAddPopupCloseButton.addEventListener('click', cardAddPopupClose);
 
-const formAddSubmitHandler = function(evt) {
+function addCardStart(el) {
+  cards.prepend(el);
+}
+
+const submitAddCardForm = function(evt) {
   evt.preventDefault();
-  const cardAddElement = cardsTemplate.querySelector('.card').cloneNode(true);
-  cardAddElement.querySelector('.card__photo').src = srcInput.value;
-  cardAddElement.querySelector('.card__title').textContent = placeInput.value;
-  cardAddElement.querySelector('.card__like').addEventListener('click', function(evt) { evt.target.classList.toggle('card__like_active') });
-  cardAddElement.querySelector('.card__trash').addEventListener('click', function(evt) { evt.target.parentElement.remove(); })
-  cardAddElement.querySelector('.card__photo').addEventListener('click', function() {
-    popupImg.classList.add('popup_is-opened');
-    popupImgImg.src = srcInput.value;
-    popupImgTitle.textContent = placeInput.value;
-  });
-  cards.prepend(cardAddElement);
+  const name = placeInput.value;
+  const link = srcInput.value;
+  const alt = "";
+  const card = createCard(name, link, alt);
+  addCardStart(card);
   cardAddPopupClose();
   srcInput.value = "";
   placeInput.value = "";
 }
 
-cardAddForm.addEventListener('submit', formAddSubmitHandler);
+cardAddForm.addEventListener('submit', submitAddCardForm);
 
 // PopupImg
 
-const PopupImgClose = function() {
+const popupImgClose = function() {
   closePopup(popupImg);
 }
 
-popupImgButtonClose.addEventListener('click', PopupImgClose);
+popupImgButtonClose.addEventListener('click', popupImgClose);
