@@ -152,7 +152,7 @@ const submitAddCardForm = function(evt) {
   evt.preventDefault();
   const name = placeInput.value;
   const link = srcInput.value;
-  const alt = "";
+  const alt = placeInput.value;
   const card = createCard(name, link, alt);
   addCardStart(card);
   cardAddPopupClose();
