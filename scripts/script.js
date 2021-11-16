@@ -41,7 +41,6 @@ const nameInput = profilePopup.querySelector('.popup__input_type_name');
 const jobInput = profilePopup.querySelector('.popup__input_type_job');
 const profilePopupCloseButton = profilePopup.querySelector('.popup__close');
 
-
 const profileElement = document.querySelector('.profile');
 const profileTitle = profileElement.querySelector('.profile__title');
 const profileSubtitle = profileElement.querySelector('.profile__subtitle');
@@ -58,7 +57,7 @@ const popupImg = document.querySelector('.popup-image')
 const cardTitle = document.querySelector('.card__title')
 const popupImgImg = popupImg.querySelector('.popup-image__img');
 const popupImgTitle = popupImg.querySelector('.popup-image__title');
-const popupImgButtonClose = popupImg.querySelector('.popup-image__close');
+const popupImgButtonClose = popupImg.querySelector('.popup__close');
 
 // Шесть карточек «из коробки»
 
@@ -169,3 +168,27 @@ const popupImgClose = function() {
 }
 
 popupImgButtonClose.addEventListener('click', popupImgClose);
+
+// закрытие попапа по оверлею
+  
+const popups = Array.from(document.querySelectorAll('.popup'));
+  
+popups.forEach(function (popup) {
+  popup.addEventListener('click', closePopupOnOverlay); 
+})
+  
+function closePopupOnOverlay(evt) {
+  if (evt.target !== evt.currentTarget) {}
+  closePopup(evt.target);
+}
+  
+// закрытие попапа по esc
+
+document.addEventListener('keydown', closePopupbyEsc);
+
+function closePopupbyEsc(evt) {
+  const openedPopup = document.querySelector('.popup_is-opened');
+  if (evt.key === 'Escape') {
+  closePopup(openedPopup);
+  }
+}
