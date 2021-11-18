@@ -15,52 +15,54 @@ enableValidation(config);
   
 function enableValidation(obj) {
   const forms = Array.from(document.querySelectorAll(obj.formSelector));
-  forms.forEach(setEventListenertoForm);
+  forms.forEach(function(form) {
+    setEventListenertoForm(form, obj)});
   const inputs = Array.from(document.querySelectorAll(obj.inputSelector));
-  inputs.forEach(setEventListenertoInput);
+  inputs.forEach(function (input) {
+    setEventListenertoInput(input, obj)})
 }
   
-function setEventListenertoInput(input) {
-  input.addEventListener('input', checkInputValidation);
+function setEventListenertoInput(input, obj) {
+  input.addEventListener('input', function(evt) {checkInputValidation(evt, obj)});
 }
   
-function checkInputValidation(evt) {
+function checkInputValidation(evt, obj) {
   if (!evt.target.validity.valid) {
-    showInputError(evt);
+    showInputError(evt, obj);
     } else {
-    hideInputError(evt);
+    hideInputError(evt, obj);
   }
 }
   
-function showInputError(evt) {
-  evt.target.classList.add(config.inputErrorClass);
+function showInputError(evt, obj) {
+  evt.target.classList.add(obj.inputErrorClass);
   const spanError = document.querySelector(`.${evt.target.id}-error`);
-  spanError.classList.add(config.errorClass);
+  spanError.classList.add(obj.errorClass);
   spanError.textContent = evt.target.validationMessage;
 }
   
-function hideInputError(evt) {
-  evt.target.classList.remove(config.inputErrorClass);
+function hideInputError(evt, obj) {
+  evt.target.classList.remove(obj.inputErrorClass);
   const spanError = document.querySelector(`.${evt.target.id}-error`);
-  spanError.classList.remove(config.errorClass);
+  spanError.classList.remove(obj.errorClass);
   spanError.textContent = ''
 }
   
-// активация/дезактивация кнопки
+//активация/дезактивация кнопки
   
-function setEventListenertoForm(form) {
-  form.addEventListener('input', handleFormInput);
-  const button = form.querySelector(config.submitButtonSelector);
-  toggleButton(form);
+function setEventListenertoForm(form, obj) {
+  form.addEventListener('input', function(evt) {handleFormInput(evt, obj)});
+  const button = form.querySelector(obj.submitButtonSelector);
+  toggleButton(form, obj);
 }
   
-function handleFormInput(evt) {
-  toggleButton(evt.currentTarget);
+function handleFormInput(evt, obj) {
+  toggleButton(evt.currentTarget, obj);
 }
   
-function toggleButton(form) {
-  const button = form.querySelector(config.submitButtonSelector);
+function toggleButton(form, obj) {
+  const button = form.querySelector(obj.submitButtonSelector);
   const isFormValid = !form.checkValidity();
   button.disabled = isFormValid;
-  button.classList.toggle(config.inactiveButtonClass, isFormValid);
+  button.classList.toggle(obj.inactiveButtonClass, isFormValid);
 }

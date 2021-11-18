@@ -1,35 +1,3 @@
-const initialCards = [{
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-    alt: 'Горы'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-    alt: 'Горный водоем зимой'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-    alt: 'Панельные дома'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-    alt: 'Сопки'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-    alt: 'Одноколейные железнодородные пути'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-    alt: 'Скалы у озера Байкал'
-  }
-];
-
 //объявление переменных
 
 const cardsTemplate = document.querySelector('#card').content;
@@ -52,6 +20,7 @@ const cardAddForm = cardAddPopup.querySelector('.popup__submit-form')
 const placeInput = cardAddPopup.querySelector('.popup__input_type_place');
 const srcInput = cardAddPopup.querySelector('.popup__input_type_src');
 const cardAddPopupCloseButton = cardAddPopup.querySelector('.popup__close');
+const cardAddFormButton = cardAddPopup.querySelector('.popup__save')
 
 const popupImg = document.querySelector('.popup-image')
 const cardTitle = document.querySelector('.card__title')
@@ -63,12 +32,13 @@ const popupImgButtonClose = popupImg.querySelector('.popup__close');
 
 function createCard(name, link, alt) {
   const cardsElement = cardsTemplate.querySelector('.card').cloneNode(true);
+  const cardPhoto = cardsElement.querySelector('.card__photo');
   cardsElement.querySelector('.card__title').textContent = name;
-  cardsElement.querySelector('.card__photo').src = link;
-  cardsElement.querySelector('.card__photo').alt = alt;
+  cardPhoto.src = link;
+  cardPhoto.alt = alt;
   cardsElement.querySelector('.card__like').addEventListener('click', likeOption);
   cardsElement.querySelector('.card__trash').addEventListener('click', removeOption);
-  cardsElement.querySelector('.card__photo').addEventListener('click', function(evt) {
+  cardPhoto.addEventListener('click', function(evt) {
     openPopup(popupImg);
     popupImgImg.src = evt.target.src;
     popupImgImg.alt = alt;
@@ -82,7 +52,7 @@ function likeOption(evt) {
 }
 
 function removeOption(evt) {
-  evt.target.parentElement.remove();
+  evt.target.closest('.card').remove();
 }
 
 function addCardEnd(el) {
@@ -98,10 +68,12 @@ initialCards.forEach(el => {
 
 function openPopup(popup) {
   popup.classList.add('popup_is-opened');
+  document.addEventListener('keydown', closePopupbyEsc);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_is-opened');
+  document.removeEventListener('keydown', closePopupbyEsc);
 }
 
 //profilePopup
@@ -139,7 +111,9 @@ const cardAddPopupClose = function() {
   closePopup(cardAddPopup);
 }
 
-cardAddButton.addEventListener('click', cardAddPopupOpen);
+cardAddButton.addEventListener('click', function(evt) {
+  cardAddPopupOpen(evt);
+});
 
 cardAddPopupCloseButton.addEventListener('click', cardAddPopupClose);
 
@@ -157,6 +131,8 @@ const submitAddCardForm = function(evt) {
   cardAddPopupClose();
   srcInput.value = "";
   placeInput.value = "";
+  cardAddFormButton.disabled = true;
+  cardAddFormButton.classList.add(config.inactiveButtonClass)
 }
 
 cardAddForm.addEventListener('submit', submitAddCardForm);
@@ -174,7 +150,7 @@ popupImgButtonClose.addEventListener('click', popupImgClose);
 const popups = Array.from(document.querySelectorAll('.popup'));
   
 popups.forEach(function (popup) {
-  popup.addEventListener('click', closePopupOnOverlay); 
+  popup.addEventListener('mousedown', closePopupOnOverlay); 
 })
   
 function closePopupOnOverlay(evt) {
@@ -183,8 +159,6 @@ function closePopupOnOverlay(evt) {
 }
   
 // закрытие попапа по esc
-
-document.addEventListener('keydown', closePopupbyEsc);
 
 function closePopupbyEsc(evt) {
   const openedPopup = document.querySelector('.popup_is-opened');

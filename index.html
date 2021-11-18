@@ -38,10 +38,7 @@
           <button class="popup__close" type="button"></button>
           <div class="popup__content">
             <h2 class="popup__title">Редактировать профиль</h2>
-
-            <!-- форма редактирования профиля -->
-
-            <form name="data" class="popup__submit-form popup__form">
+            <form name="userData" class="popup__submit-form popup__form">
               <fieldset class="popup__input-form">
                 <input name="name" type="text" class="popup__input popup__input_type_name" placeholder="Имя" minlength="2" maxlength="40" novalidate autocomplete="off" id="name-input" required>
                 <span class="name-input-error"></span>
@@ -50,8 +47,6 @@
               </fieldset>
               <button type="submit" class="popup__save popup__button">Сохранить</button>
             </form>
-
-            <!-- /форма редактирования профиля -->
 
           </div>
         </div>
@@ -63,9 +58,7 @@
           <div class="popup__content">
             <h2 class="popup__title">Новое место</h2>
 
-            <!-- форма добавления картинки -->
-
-            <form name="data" class="popup__submit-form popup__submit-form_add popup__form">
+            <form name="contentData" class="popup__submit-form popup__submit-form_add popup__form">
               <fieldset class="popup__input-form">
                 <input name="place" type="text" class="popup__input popup__input_type_place" placeholder="Название" minlength="2" maxlength="30" novalidate autocomplete="off" id="place-input" required>
                 <span class="place-input-error"></span>
@@ -74,8 +67,6 @@
               </fieldset>
               <button type="submit" class="popup__save popup__button">Сохранить</button>
             </form>
-
-            <!-- /форма добавления картинки -->
 
           </div>
         </div>
@@ -97,13 +88,14 @@
   <template id="card">
     <div class="card">
       <button class="card__trash"></button>
-      <img src="##" alt="" class="card__photo">
+      <div class="card__photo-container"><img src="##" alt="" class="card__photo"></div>
       <div class="card__flex-block">
         <h2 class="card__title"></h2>
         <button type="button" class="card__like"></button>
       </div>
     </div>
   </template>
+  <script src="./scripts/initialData.js"></script>
   <script src="./scripts/script.js"></script>
   <script src="./scripts/validate.js"></script>
 </body>
