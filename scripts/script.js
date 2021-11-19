@@ -109,6 +109,7 @@ const cardAddPopupOpen = function() {
 
 const cardAddPopupClose = function() {
   closePopup(cardAddPopup);
+  document.removeEventListener('keydown', closePopupbyEsc);
 }
 
 cardAddButton.addEventListener('click', function(evt) {
@@ -146,23 +147,24 @@ const popupImgClose = function() {
 popupImgButtonClose.addEventListener('click', popupImgClose);
 
 // закрытие попапа по оверлею
-  
+
 const popups = Array.from(document.querySelectorAll('.popup'));
-  
-popups.forEach(function (popup) {
-  popup.addEventListener('mousedown', closePopupOnOverlay); 
+
+popups.forEach(function(popup) {
+  popup.addEventListener('mousedown', closePopupOnOverlay);
 })
-  
+
 function closePopupOnOverlay(evt) {
-  if (evt.target !== evt.currentTarget) {}
-  closePopup(evt.target);
-}
-  
+  if (evt.target.classList.contains('popup')) {
+    closePopup(evt.target);
+  }
+} 
+
 // закрытие попапа по esc
 
 function closePopupbyEsc(evt) {
   const openedPopup = document.querySelector('.popup_is-opened');
   if (evt.key === 'Escape') {
-  closePopup(openedPopup);
+    closePopup(openedPopup);
   }
 }
