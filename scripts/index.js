@@ -43,11 +43,11 @@ initialCards.forEach ((item) => {
 
 const profilePopupFormValidator = new FormValidator(profilePopupForm, config);
 
-profilePopupFormValidator.enableValidation(profilePopupForm, config);
+profilePopupFormValidator.enableValidation();
 
 const cardAddFormValidator = new FormValidator(cardAddForm, config);
 
-cardAddFormValidator.enableValidation(cardAddForm, config);
+cardAddFormValidator.enableValidation();
 
 //profilePopup
 

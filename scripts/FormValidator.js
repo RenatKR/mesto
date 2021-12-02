@@ -12,9 +12,9 @@ export class FormValidator {
 
   }
 
-  enableValidation(form, config) {
-    this._setEventListenertoForm(form, config);
-    this._inputList.forEach((input) => this._setEventListenertoInput(input, config))
+  enableValidation() {
+    this._setEventListenertoForm();
+    this._inputList.forEach((input) => this._setEventListenertoInput(input))
   }
 
   _setEventListenertoForm() {
