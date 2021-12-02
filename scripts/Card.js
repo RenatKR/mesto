@@ -1,14 +1,15 @@
-import {openPopup, popupImg, popupImgImg, popupImgTitle} from './index.js'
+import {openPopup, popupImg, popupImgImg, popupImgTitle} from './utils.js'
 
 export class Card {
-  constructor(title, src, alt) {
+  constructor(title, src, alt, selector) {
     this._title = title;
     this._src = src;
     this._alt = alt;
+    this._selector = selector;
   }
 
   _getTemplate () {
-    const cardElement = document.querySelector('#card').content.querySelector('.card').cloneNode(true);
+    const cardElement = document.querySelector(this._selector).content.querySelector('.card').cloneNode(true);
     return cardElement;
   }
 
@@ -29,7 +30,8 @@ export class Card {
   }
 
   _removeOption() {
-    this._element.querySelector('.card__trash').closest('.card').remove();
+    this._element.remove();
+    this._element = null;
   }
 
   _openPopupImg() {
@@ -51,8 +53,9 @@ export class Card {
     this._setEventListenerRemove();
     this._setEventListenerPopupImgOpen();
     this._element.querySelector('.card__title').textContent = this._title;
-    this._element.querySelector('.card__photo').src = this._src;
-    this._element.querySelector('.card__photo').alt = this._alt;
+    this._photo = this._element.querySelector('.card__photo');
+    this._photo.src = this._src;
+    this._photo.alt = this._alt;
     return this._element;
   }
 }
