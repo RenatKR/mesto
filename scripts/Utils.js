@@ -14,7 +14,7 @@ export function openPopup(popup) {
     document.addEventListener('keydown', closePopupbyEsc);
   }
 
-// закрытие попапа по esc
+// закрытие попапа по escape
 
 export function closePopupbyEsc(evt) {
   const openedPopup = document.querySelector('.popup_is-opened');
