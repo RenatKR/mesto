@@ -31,14 +31,14 @@ const cardAddFormButton = cardAddPopup.querySelector('.popup__save');
 
 const popupImgButtonClose = popupImg.querySelector('.popup__close');
 
-function renderCards(card) {
+function createCard(item) {
+  const card = new Card(item.name, item.link, item.alt, 'template');
   const cardElement = card.renderCard();
   return cardElement;
 }
 
 initialCards.forEach ((item) => {
-  const card = new Card(item.name, item.link, item.alt, 'template');
-  cards.appendChild(renderCards(card));
+  cards.appendChild(createCard(item));
 })
 
 const profilePopupFormValidator = new FormValidator(profilePopupForm, config);
@@ -96,11 +96,12 @@ function addCardStart(el) {
 
 const submitAddCardForm = function(evt) {
   evt.preventDefault();
-  const name = placeInput.value;
-  const link = srcInput.value;
-  const alt = placeInput.value;
-  const card = new Card(name, link, alt, 'template');
-  addCardStart(renderCards(card));
+  const item = {
+    name: placeInput.value,
+    link: srcInput.value,
+    alt: placeInput.value,
+  }
+  addCardStart(createCard(item));
   closePopup(cardAddPopup);
   srcInput.value = "";
   placeInput.value = "";
