@@ -1,5 +1,5 @@
-export class FormValidator {
-  constructor (form, config) {
+export default class FormValidator {
+  constructor(form, config) {
     this._formSelector = config.formSelector;
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;
@@ -18,14 +18,14 @@ export class FormValidator {
   }
 
   _setEventListenertoForm() {
-    this._form.addEventListener('input', () => {this._handleFormInput()});
+    this._form.addEventListener('input', () => { this._handleFormInput() });
     this.toggleButton();
   }
-  
+
   _handleFormInput() {
     this.toggleButton();
   }
-  
+
   toggleButton() {
     const isFormValid = !this._form.checkValidity();
     this._submitButton.disabled = isFormValid;
@@ -33,13 +33,13 @@ export class FormValidator {
   }
 
   _setEventListenertoInput(input) {
-    input.addEventListener('input', (evt) => {this._checkInputValidation(evt)});
+    input.addEventListener('input', (evt) => { this._checkInputValidation(evt) });
   }
 
   _checkInputValidation(evt) {
     if (!evt.target.validity.valid) {
       this._showInputError(evt);
-      } else {
+    } else {
       this._hideInputError(evt);
     }
   }
@@ -50,7 +50,7 @@ export class FormValidator {
     spanError.classList.add(this._errorClass);
     spanError.textContent = evt.target.validationMessage;
   }
-  
+
   _hideInputError(evt) {
     evt.target.classList.remove(this._inputErrorClass);
     const spanError = this._form.querySelector(`.${evt.target.id}-error`);
