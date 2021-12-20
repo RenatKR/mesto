@@ -8,84 +8,76 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import './index.css';
 
-
-
 // рендер карточек "из коробки"
+
+function createCard(item, handleCardClick, place) {
+  const card = new Card({ item, handleCardClick }, '.template');
+  const cardElement = card.renderCard();
+  if (place) {
+    sectionCard.addItem(cardElement);
+  } else {
+    sectionCard.addItemPrepend(cardElement);
+  }
+}
+
+const PopupWithImageforThisCard = new PopupWithImage('.popup-image');
 
 const sectionCard = new Section({
     data: initialCards,
     renderer: (item) => {
-      const card = new Card(item.name, item.link, item.alt, '.template', {
-        handleCardClick: () => {
-          const PopupWithImageforThisCard = new PopupWithImage(item.name, item.link, item.alt, '.popup-image');
-          PopupWithImageforThisCard.open();
-        }
-      })
-      const cardElement = card.renderCard();
-      sectionCard.addItem(cardElement);
+      createCard(item, () => {
+        PopupWithImageforThisCard.open(item.name, item.link, item.alt);
+      }, true)
     }
   },
   '.cards');
 
 sectionCard.renderItems();
 
-//profilePopup
-
-const UserInfoCurrent = new UserInfo('.profile__title', '.profile__subtitle');
-UserInfoCurrent.getUserInfo();
-
-profileEditButton.addEventListener('click', profilePopupOpen);
-
-function profilePopupOpen() {
-
-  const popupEditUserInfo = new PopupWithForm('.popup_profile', {
-    handleSubmitForm: (evt) => {
-      evt.preventDefault();
-      const userInfoForSet = new UserInfo('.profile__title', '.profile__subtitle');
-      userInfoForSet.setUserInfo(popupEditUserInfo._getInputValues());
-      popupEditUserInfo.close();
-    }
-  })
-  popupEditUserInfo.setValues(UserInfoCurrent.getUserInfo());
-  popupEditUserInfo.open();
-  popupEditUserInfo.setEventListeners();
-}
-
 // popupAddCard
 
 cardAddButton.addEventListener('click', addNewCardPopupOpen);
 
-function addNewCardPopupOpen() {
-
-  const popupAddNewCard = new PopupWithForm('.popup-add', {
-    handleSubmitForm: (evt) => {
-      evt.preventDefault();
-      const item = [{
-        name: placeInput.value,
-        link: srcInput.value,
-        alt: placeInput.value,
-      }]
-      const sectionCard = new Section({
-          data: item,
-          renderer: (item) => {
-            const card = new Card(item.name, item.link, item.alt, '.template', {
-              handleCardClick: () => {
-                const PopupWithImageforThisCard = new PopupWithImage(item.name, item.link, item.alt, '.popup-image');
-                PopupWithImageforThisCard.open();
-              }
-            });
-            const cardElement = card.renderCard();
-            sectionCard.addItemPrepend(cardElement);
-          }
-        },
-        '.cards');
-      sectionCard.renderItems();
-      popupAddNewCard.close();
+const popupAddNewCard = new PopupWithForm('.popup-add', {
+  handleSubmitForm: () => {
+    const item = {
+      name: placeInput.value,
+      link: srcInput.value,
+      alt: placeInput.value,
     }
-  });
+    createCard(item, () => {
+      PopupWithImageforThisCard.open(item.name, item.link, item.alt);
+    }, false)
+    popupAddNewCard.close();
+  }
+})
 
+popupAddNewCard.setEventListeners();
+
+function addNewCardPopupOpen() {
   popupAddNewCard.open();
-  popupAddNewCard.setEventListeners();
+  cardAddFormValidator.toggleButton();
+}
+
+//profilePopup
+
+const userInfoForm = new UserInfo('.profile__title', '.profile__subtitle');
+
+const popupEditUserInfo = new PopupWithForm('.popup_profile', {
+  handleSubmitForm: (result) => {
+    userInfoForm.setUserInfo(result);
+    popupEditUserInfo.close();
+  }
+})
+
+popupEditUserInfo.setEventListeners();
+
+profileEditButton.addEventListener('click', profilePopupOpen);
+
+function profilePopupOpen() {
+  popupEditUserInfo.setInputValues(userInfoForm.getUserInfo());
+  popupEditUserInfo.open();
+  profilePopupFormValidator.toggleButton();
 }
 
 //валидация инициация

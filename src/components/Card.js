@@ -1,14 +1,14 @@
 export default class Card {
-  constructor(title, src, alt, selector, { handleCardClick }) {
-    this._title = title;
-    this._src = src;
-    this._alt = alt;
+  constructor({ item, handleCardClick }, selector) {
+    this._title = item.name;
+    this._src = item.link;
+    this._alt = item.alt;
     this._selector = selector;
-    this.handleCardClick = handleCardClick;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
-    const cardElement = document.querySelector('.template').content.querySelector('.card').cloneNode(true);
+    const cardElement = document.querySelector(this._selector).content.querySelector('.card').cloneNode(true);
     return cardElement;
   }
 
@@ -35,7 +35,7 @@ export default class Card {
 
   _setEventListenerPopupImgOpen() {
     this._element.querySelector('.card__photo').addEventListener('click', () => {
-      this.handleCardClick();
+      this._handleCardClick(this._title, this._src, this._alt);
     });
   }
 
