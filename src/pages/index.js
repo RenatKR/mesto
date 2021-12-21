@@ -10,44 +10,40 @@ import './index.css';
 
 // рендер карточек "из коробки"
 
-function createCard(item, handleCardClick, place) {
-  const card = new Card({ item, handleCardClick }, '.template');
+function createCard(item) {
+  const card = new Card({
+    item,
+    handleCardClick: () => {
+      popupWithImage.open(item);
+    }
+  }, '.template');
   const cardElement = card.renderCard();
-  if (place) {
-    sectionCard.addItem(cardElement);
-  } else {
-    sectionCard.addItemPrepend(cardElement);
-  }
+  return cardElement;
 }
 
-const PopupWithImageforThisCard = new PopupWithImage('.popup-image');
+const popupWithImage = new PopupWithImage('.popup-image');
 
 const sectionCard = new Section({
-    data: initialCards,
     renderer: (item) => {
-      createCard(item, () => {
-        PopupWithImageforThisCard.open(item.name, item.link, item.alt);
-      }, true)
+      sectionCard.addItem(createCard(item));
     }
   },
   '.cards');
 
-sectionCard.renderItems();
+sectionCard.renderItems(initialCards);
 
 // popupAddCard
 
 cardAddButton.addEventListener('click', addNewCardPopupOpen);
 
 const popupAddNewCard = new PopupWithForm('.popup-add', {
-  handleSubmitForm: () => {
+  handleSubmitForm: (data) => {
     const item = {
-      name: placeInput.value,
-      link: srcInput.value,
-      alt: placeInput.value,
+      name: data.place,
+      link: data.src,
+      alt: data.place,
     }
-    createCard(item, () => {
-      PopupWithImageforThisCard.open(item.name, item.link, item.alt);
-    }, false)
+    sectionCard.addItemPrepend(createCard(item));
     popupAddNewCard.close();
   }
 })

@@ -16,8 +16,10 @@ export default class FormValidator {
   }
 
   _setEventListenertoInput(input) {
-    input.addEventListener('input', (evt) => { this._checkInputValidation(evt) });
-    input.addEventListener('input', () => { this.toggleButton() });
+    input.addEventListener('input', (evt) => {
+      this._checkInputValidation(evt)
+      this.toggleButton()
+    })
   }
 
   _checkInputValidation(evt) {
