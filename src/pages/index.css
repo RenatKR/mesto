@@ -21,6 +21,7 @@
 @import url(../blocks/profile/__add/profile__add.css);
 @import url(../blocks/photo-grid/photo-grid.css);
 @import url(../blocks/cards/cards.css);
+@import url(../blocks/profile/__avatar-edit/avatar-edit.css);
 
 /*card*/
 
@@ -32,6 +33,8 @@
 @import url(../blocks/card/__like/card__like_active.css);
 @import url(../blocks/card/__trash/card__trash.css);
 @import url(../blocks/card/__photo/card__photo-container.css);
+@import url(../blocks/card/__like-counter/card__like-counter.css);
+@import url(../blocks/card/__like-section/card__like-section.css);
 
 /*footer*/
 

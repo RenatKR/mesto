@@ -9,7 +9,9 @@ const cardAddButton = profileElement.querySelector('.profile__add-button');
 const cardAddPopup = document.querySelector('.popup-add');
 const cardAddForm = cardAddPopup.querySelector('.popup__submit-form')
 
-const placeInput = cardAddPopup.querySelector('.popup__input_type_place');
-const srcInput = cardAddPopup.querySelector('.popup__input_type_src');
+const avaEditPopup = document.querySelector('.popup-ava-edit');
+const avaEditButton = document.querySelector('.profile__avatar-edit');
 
-export { profilePopup, profilePopupForm, profileElement, profileEditButton, cardAddButton, cardAddPopup, cardAddForm, placeInput, srcInput }
+const avaImg = document.querySelector('.profile__avatar');
+
+export { profilePopup, profilePopupForm, profileElement, profileEditButton, cardAddButton, cardAddPopup, cardAddForm, avaEditPopup, avaEditButton, avaImg }

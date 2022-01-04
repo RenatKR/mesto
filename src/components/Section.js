@@ -11,10 +11,4 @@ export default class Section {
   addItemPrepend(element) {
     this._container.prepend(element);
   }
-
-  renderItems(data) {
-    data.forEach((item) => {
-      this._renderer(item);
-    });
-  }
 }

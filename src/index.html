@@ -10,20 +10,21 @@
 <body class="body">
   <div class="page">
     <header class="header">
-      <img src="<%=require('./images/header__logo.svg')%>" alt="Место" class="header__logo">
+      <img src="./images/header__logo.svg" alt="Место" class="header__logo">
     </header>
     <main class="content">
       <section class="profile">
         <div class="profile__info">
-          <img src="<%=require('./images/profile__avatar.jpg')%>" alt="Фото" class="profile__avatar">
-          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <img src="" alt="Фото" class="profile__avatar">
+          <div class="profile__avatar-edit"></div>
+          <h1 class="profile__title"></h1>
           <button class="profile__edit-button" type="button">
-            <img src="<%=require('./images/profile__edit.svg')%>" alt="Редактировать" class="profile__edit">
+            <img src="./images/profile__edit.svg" alt="Редактировать" class="profile__edit">
           </button>
-          <p class="profile__subtitle">Исследователь океана</p>
+          <p class="profile__subtitle"></p>
         </div>
         <button class="profile__add-button" type="button">
-          <img src="<%=require('./images/profile__add.svg')%>" alt="Добавить" class="profile__add">
+          <img src="./images/profile__add.svg" alt="Добавить" class="profile__add">
         </button>
       </section>
       <section class="photo-grid">
@@ -79,6 +80,36 @@
           <h2 class="popup-image__title">Title</h2>
         </div>
       </section>
+
+      <section class="popup popup-ava-edit">
+        <div class="popup__container">
+          <button class="popup__close" type="button"></button>
+          <div class="popup__content">
+            <h2 class="popup__title">Обновить аватар</h2>
+            <form name="avaData" class="popup__submit-form popup__submit-form_ava popup__form">
+              <fieldset class="popup__input-form">
+                <input name="ava" type="url" class="popup__input popup__input_type_ava" placeholder="Ссылка на изображение" novalidate autocomplete="off" id="ava-input" required>
+                <span class="ava-input-error"></span>
+              </fieldset>
+              <button type="submit" class="popup__save popup__button">Сохранить</button>
+            </form>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="popup popup-del-confirm">
+        <div class="popup__container">
+          <button class="popup__close" type="button"></button>
+          <div class="popup__content">
+            <h2 class="popup__title">Вы уверены?</h2>
+            <button type="submit" class="popup__save popup__button">Да</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+
     </main>
     <footer class="footer">
       <p class="footer__author">&#169; 2021. Mesto Russia</p>
@@ -91,7 +122,9 @@
       <div class="card__photo-container"><img src="##" alt="" class="card__photo"></div>
       <div class="card__flex-block">
         <h2 class="card__title"></h2>
-        <button type="button" class="card__like"></button>
+        <div class="card__like-section"><button type="button" class="card__like"></button>
+          <p class="card__like-counter"></p>
+        </div>
       </div>
     </div>
   </template>
