@@ -7,14 +7,12 @@ export default class PopupConfirmDel extends Popup {
   }
 
   open(card) {
-
     super.open();
-    this._setEventListeners();
     this._card = card;
   }
 
-  _setEventListeners() {
-    super._setEventListeners();
+  setEventListeners() {
+    super.setEventListeners();
     this._popup.querySelector('.popup__button').addEventListener('click', () => {
       this._handleSubmit(this._card);
       super.close()

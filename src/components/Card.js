@@ -44,30 +44,22 @@ export default class Card {
   }
 
   renderCard() {
-    if (this._ownerId === '4c1e26ebaa11b3709355e511') {
-      this._element = this._getTemplate();
-      this._setEventListenerPopupImgOpen();
-      this._setEventListenerLike();
-      this._setEventListenerRemove();
-      this._element.querySelector('.card__title').textContent = this._title;
-      this._photo = this._element.querySelector('.card__photo');
-      this._photo.src = this._src;
-      this._photo.alt = this._alt;
-      this._element.querySelector('.card__like-counter').textContent = this._likes;
-      return this._element;
-    } else {
-      this._element = this._getTemplate();
+    this._element = this._getTemplate();
+    this._setEventListenerPopupImgOpen();
+    this._setEventListenerLike();
+    this._setEventListenerRemove();
+    this._element.querySelector('.card__title').textContent = this._title;
+    this._photo = this._element.querySelector('.card__photo');
+    this._photo.src = this._src;
+    this._photo.alt = this._alt;
+    this._element.querySelector('.card__like-counter').textContent = this._likes;
+
+    if (this._ownerId !== '4c1e26ebaa11b3709355e511') {
       this._element.querySelector('.card__trash').remove();
-      this._setEventListenerPopupImgOpen();
-      this._setEventListenerLike();
-      this._element.querySelector('.card__title').textContent = this._title;
-      this._photo = this._element.querySelector('.card__photo');
-      this._photo.src = this._src;
-      this._photo.alt = this._alt;
-      this._element.querySelector('.card__like-counter').textContent = this._likes;
-      return this._element;
     }
+    return this._element;
   }
+
 
   getCardId() {
     const cardId = this._cardId;
@@ -78,20 +70,22 @@ export default class Card {
     this._element.querySelector('.card__like-counter').textContent = number;
   }
 
-  handleLikeToggle() {
+  likeToggle() {
+    this._element.querySelector('.card__like').classList.toggle('card__like_active');
+  }
+
+  checkLikeToggle() {
     if (this._likesArray.find(item => item._id === '4c1e26ebaa11b3709355e511')) {
-      this._element.querySelector('.card__like').classList.toggle('card__like_active');
+      this.likeToggle();
     }
   }
 
   handleLikeClickMain() {
     if (this._element.querySelector('.card__like').classList.contains('card__like_active')) {
       this._handleLikeClickRemove(this._cardId);
-      this._element.querySelector('.card__like').classList.toggle('card__like_active');
 
     } else {
       this._handleLikeClickAdd(this._cardId);
-      this._element.querySelector('.card__like').classList.toggle('card__like_active');
     }
   }
 }

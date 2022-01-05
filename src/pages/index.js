@@ -33,21 +33,34 @@ function createCard(item) {
       api.setLikeCard(card._cardId)
         .then((data) => {
           card.setNumLiketoCard(data.likes.length);
-        });
+        })
+        .then(() => {
+          card.likeToggle();
+        })
+        .catch((err) => {
+          console.log(err);
+        })
     },
     handleLikeClickRemove: () => {
       api.deleteLikeCard(card._cardId)
         .then((data) => {
           card.setNumLiketoCard(data.likes.length);
+        })
+        .then(() => {
+          card.likeToggle();
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
   }, '.template');
   const cardElement = card.renderCard();
-  card.handleLikeToggle();
+  card.checkLikeToggle();
   return cardElement;
 }
 
 const popupWithImage = new PopupWithImage('.popup-image');
+popupWithImage.setEventListeners();
 
 const sectionCard = new Section({
     renderer: (item) => {
@@ -69,6 +82,7 @@ const confirmDelPopup = new PopupConfirmDel('.popup-del-confirm', {
       })
   }
 });
+confirmDelPopup.setEventListeners();
 
 // popupAddCard
 
@@ -88,10 +102,12 @@ const popupAddNewCard = new PopupWithForm('.popup-add', {
       .then(() => {
         popupAddNewCard.close();
       })
+      .catch((err) => {
+        console.log(err);
+      })
       .finally(() => {
         popupAddNewCard.loading(true);
       });
-
   }
 })
 
@@ -113,10 +129,13 @@ const popupEditUserInfo = new PopupWithForm('.popup_profile', {
       name: result.name,
       about: result.job
     }
-    userInfoForm.setUserInfo(refRes);
     api.editUserInfo(refRes)
-      .then(() => {
+      .then((data) => {
+        userInfoForm.setUserInfo(data);
         popupEditUserInfo.close();
+      })
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         popupEditUserInfo.loading(true);
@@ -145,11 +164,13 @@ const popupEditAva = new PopupWithForm('.popup-ava-edit', {
     const src = {
       avatar: data.ava
     }
-    console.log(src);
     api.editUserAva(src)
       .then(() => {
         avaImg.src = data.ava;
         popupEditAva.close();
+      })
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         popupEditAva.loading(true);

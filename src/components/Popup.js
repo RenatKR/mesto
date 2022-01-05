@@ -7,7 +7,6 @@ export default class Popup {
   open() {
     this._popup.classList.add('popup_is-opened');
     document.addEventListener('keyup', this._handleEscClose);
-    this._setEventListeners();
   }
 
   close() {
@@ -19,7 +18,7 @@ export default class Popup {
     if (evt.key === 'Escape') { this.close() };
   }
 
-  _setEventListeners() {
+  setEventListeners() {
     this._popup.querySelector('.popup__close').addEventListener('click', (evt) => this.close());
     this._popup.addEventListener('mousedown', this._closePopupOnOverlay);
   }
