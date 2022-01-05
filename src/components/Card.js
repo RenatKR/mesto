@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({ item, handleCardClick, handleTrashClick, handleLikeClickAdd, handleLikeClickRemove }, selector) {
+  constructor(userId, { item, handleCardClick, handleTrashClick, handleLikeClickAdd, handleLikeClickRemove }, selector) {
     this._title = item.name;
     this._src = item.link;
     this._alt = item.name;
@@ -12,6 +12,7 @@ export default class Card {
     this._handleLikeClickAdd = handleLikeClickAdd;
     this._handleLikeClickRemove = handleLikeClickRemove;
     this._likesArray = item.likes;
+    this._user = userId;
   }
 
   _getTemplate() {
@@ -54,12 +55,11 @@ export default class Card {
     this._photo.alt = this._alt;
     this._element.querySelector('.card__like-counter').textContent = this._likes;
 
-    if (this._ownerId !== '4c1e26ebaa11b3709355e511') {
+    if (this._ownerId !== this._user) {
       this._element.querySelector('.card__trash').remove();
     }
     return this._element;
   }
-
 
   getCardId() {
     const cardId = this._cardId;
@@ -75,7 +75,7 @@ export default class Card {
   }
 
   checkLikeToggle() {
-    if (this._likesArray.find(item => item._id === '4c1e26ebaa11b3709355e511')) {
+    if (this._likesArray.find(item => item._id === this._user)) {
       this.likeToggle();
     }
   }

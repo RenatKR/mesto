@@ -10,7 +10,7 @@ import Api from '../components/Api.js';
 import PopupConfirmDel from '../components/PopupConfirmDel.js';
 import './index.css';
 
-// рендер карточек
+//Api
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-33',
@@ -20,8 +20,22 @@ const api = new Api({
   }
 })
 
+let userId;
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([user, cards]) => {
+    userId = user._id;
+    userInfoForm.setUserInfo(user);
+    avaImg.src = user.avatar;
+    cards.map((item) => {
+      sectionCard.addItem(createCard(item))
+    })
+  }).catch((err) => console.log(err))
+
+// рендер карточек
+
 function createCard(item) {
-  const card = new Card({
+  const card = new Card(userId, {
     item,
     handleCardClick: () => {
       popupWithImage.open(item);
@@ -200,24 +214,3 @@ cardAddFormValidator.enableValidation();
 const avaEditFormValidator = new FormValidator(avaEditPopup, config)
 
 avaEditFormValidator.enableValidation();
-
-//Api
-
-const initialCardsApi = api.getInitialCards();
-initialCardsApi.then((data) => {
-  data.map((item) => {
-    sectionCard.addItem(createCard(item));
-  })
-}).catch((err) => {
-  console.log(err);
-})
-
-const userInfoApi = api.getUserInfo();
-userInfoApi.then((data) => {
-  userInfoForm.setUserInfo(data);
-  avaImg.src = data.avatar;
-}).catch((err) => {
-  console.log(err);
-}).finally(() => {
-  popupEditUserInfo.loading(true);
-})
